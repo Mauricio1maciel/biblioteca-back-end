@@ -38,10 +38,9 @@ const sequelize = new Sequelize('bibliotecla2025', 'postgres', 'postgres', {
     }
   );
 
-
   try {
     await sequelize.authenticate();
-    console.log('A conexão com o banco foi feita com sucesso.');
+    console.log('A conexão com o banco realizada com sucesso.');
   } catch (error) {
     console.error('Erro ao conectar com o obanco de dados:', error);
   }
@@ -51,8 +50,19 @@ app.use(express.json());
 
 app.get('/teste',(req, res)=> {
     res.send('Teste ok');
-
 });
+
+//rotas crud da tabala editora
+app.get('/editora', async (req, res) => {
+    const respostaBanco = await Editora.findAll();
+    res.json(respostaBanco);
+});
+
+app.get('/editora/:id', async (req, res) => {
+    const id = req.params.id;
+    const respostaBanco = await Editora.findByPk(id);
+    res.json(respostaBanco);
+    });
 
 
 

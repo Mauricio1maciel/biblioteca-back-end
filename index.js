@@ -1,19 +1,9 @@
 import express from "express";
-import { Sequelize, DataTypes } from "sequelize";
-
-//configuração da conexão com banco de dados
-const sequelize = new Sequelize('bibliotecla2025', 'postgres', 'postgres', {
-    host: 'localhost',
-    port: 5432,
-    dialect: 'postgres',
-    define:{
-        timestamps: false,
-        freezeTableName: true
-    }
-  });
+import {  DataTypes } from "sequelize";
+import banco from "./banco.js";
 
 //mapeamento da model Editora
-  const Editora = sequelize.define(
+  const Editora = banco.define(
     'editora',
     {
       // Model attributes are defined here
@@ -39,7 +29,7 @@ const sequelize = new Sequelize('bibliotecla2025', 'postgres', 'postgres', {
   );
 
   try {
-    await sequelize.authenticate();
+    await banco.authenticate();
     console.log('A conexão com o banco realizada com sucesso.');
   } catch (error) {
     console.error('Erro ao conectar com o obanco de dados:', error);
@@ -88,7 +78,7 @@ app.put('/editora/:id', async (req, res) => {
 
 app.delete('/editora/:id', async (req, res) => {
   const ideditora = req.params.id;
-  
+
   const respostaBanco = await Editora.destroy({where: {ideditora}});
   res.json(respostaBanco);
   });

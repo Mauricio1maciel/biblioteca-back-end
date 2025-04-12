@@ -3,6 +3,7 @@ import banco from "./banco.js";
 import editora from "./controller/EditoraController.js";
 import categoria from "./controller/CategoriaController.js";
 import autor from "./controller/AutorController.js";
+import usuario from "./controller/UsuarioController.js";
 
   try {
     await banco.authenticate();
@@ -36,5 +37,12 @@ app.get('/autor/:id', autor.selecionar);
 app.post('/autor', autor.inserir);
 app.put('/autor/:id', autor.alterar);
 app.delete('/autor/:id', autor.excluir);
+
+app.get('/usuario', usuario.listar);
+app.get('/usuario/:id', usuario.selecionar);
+app.post('/usuario', usuario.inserir);
+app.put('/usuario/:id', usuario.alterar);
+app.delete('/usuario/:id', usuario.excluir);
+
 
 app.listen(3000, ()=>{console.log('Servidor rodando na porta 3000')})

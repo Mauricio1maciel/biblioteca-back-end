@@ -34,10 +34,5 @@ export default banco.define(
       type: DataTypes.STRING(100),
       allowNull: true
     }
-  },
-  {
-    tableName: 'usuario',
-    schema: 'public',
-    timestamps: false
   }
 );

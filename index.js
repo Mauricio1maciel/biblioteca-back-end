@@ -5,6 +5,7 @@ import categoria from "./controller/CategoriaController.js";
 import autor from "./controller/AutorController.js";
 import usuario from "./controller/UsuarioController.js";
 import livro from "./controller/LivroController.js";
+import emprestimo from "./controller/EmprestimoController.js";
 
   try {
     await banco.authenticate();
@@ -50,6 +51,11 @@ app.get('/livro/:id', livro.selecionar);
 app.post('/livro', livro.inserir);
 app.put('/livro/:id', livro.alterar);
 app.delete('/livro/:id', livro.excluir);
+
+app.get('/emprestimo', emprestimo.listar);
+app.get('/emprestimo/:id', emprestimo.selecionar);
+app.post('/emprestar', emprestimo.emprestar);
+app.put('/devolver/:id', emprestimo.devolver);
 
 
 

@@ -69,14 +69,11 @@ async function emprestar(req, res)  {
     }
 
  async function devolver(req, res)  {
-    const observacao = req.body.observacao;
+    const observacao = req.body.observacao || null;
 
     const idemprestimo = req.params.id;
     
-    //verifica se existe o parametro observacao
-    if (!observacao) {
-        res.status(422).send('O parâmetro observacao é obrigatório.');
-    }
+
 
     //verifica se o idemprestimo existe
     const emprestimoBanco = await Emprestimo.findByPk(idemprestimo);
@@ -94,30 +91,24 @@ async function emprestar(req, res)  {
      //verifica se o usuário tem um emprétimo pendente
      const vencimento = moment(emprestimoBanco.vencimento);
 
-if (devolucao.isAfter(vencimento)) {
-    res.json ( 'A devolução está atrasada.');
-  // Aqui você pode guardar essa informação em um campo "multa", "atraso", etc.
-}else{
+    if (devolucao.isAfter(vencimento)) {
+        res.status(422).send( 'A devolução está atrasada.');
+    }
     
-    // //inserindo o devolução no banco
-    const respostaBanco =  await Emprestimo.update(
-        {
-          devolucao,
-          observacao
-        },
-        {
-          where: { idemprestimo }
-        }
+       //inserindo o devolução no banco
+       const respostaBanco =  await Emprestimo.update(
+             {devolucao,observacao},
+                {where: { idemprestimo }}
       );
   
-      // Atualiza o livro para emprestado = false
-      const idlivro = emprestimoBanco.idlivro;
-      await Livro.update(
+       // Atualiza o livro para emprestado = false
+       const idlivro = emprestimoBanco.idlivro;
+       await Livro.update(
         { emprestado: false },
         { where: { idlivro } });
       res.json(respostaBanco);
     }
-}
+
 
 
 

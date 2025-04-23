@@ -86,15 +86,39 @@ async function inserir(req, res)  {
               }
           
               // atualiza os campos de demissão e ativo
-              await Funcionario.update({
+              const respostaBanco = await Funcionario.update({
                 demissao,
                 ativo: false
               },
               { where: { idfuncionario } });
           
-              res.json(funcionarioBanco); 
+              res.json(respostaBanco); 
             
           }
           
+          async function definirSenha(req, res) {
+            const idfuncionario = req.params.id;
+            const senha = req.body.senha;
+          
+            // Verifica se o id é válido (existe no banco)
+            const funcionarioBanco = await Funcionario.findByPk(idfuncionario);
+            if (!funcionarioBanco) {
+              return res.status(404).send('Funcionário não encontrado.');
+            }
+          
+            // Valida o comprimento da senha
+            if (!senha || senha.length < 6 || senha.length > 20) {
+              return res.status(422).send('A senha deve ter entre 6 e 20 caracteres.');
+            }
+          
+            // Atualiza a senha e limpa o token
+            const respostaBanco = await funcionarioBanco.update({
+              senha,
+              token: null
+            });
+          
+            res.json(respostaBanco);
+          }
+          
 
-export default {listar, selecionar, inserir, alterar, demitir};
+export default {listar, selecionar, inserir, alterar, demitir, definirSenha};

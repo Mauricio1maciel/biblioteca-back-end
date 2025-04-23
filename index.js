@@ -64,6 +64,7 @@ app.get('/funcionario/:id', funcionario.selecionar);
 app.post('/funcionario', funcionario.inserir);
 app.put('/funcionario/:id', funcionario.alterar);
 app.put('/demitir', funcionario.demitir);
+app.put('/definirSenha/:id', funcionario.definirSenha);
 
 
 app.listen(3000, ()=>{console.log('Servidor rodando na porta 3000')})

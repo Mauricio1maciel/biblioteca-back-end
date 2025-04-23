@@ -43,4 +43,27 @@ async function excluir(req, res)  {
         res.json(respostaBanco);
         }
 
-export default {listar, selecionar, inserir, alterar, excluir };
+async function definirSenha(req, res) {
+                    const idusuario = req.params.id;
+                    const senha = req.body.senha;
+                  
+                    // Verifica se o id é válido (existe no banco)
+                    const UsuarioBanco = await Usuario.findByPk(idusuario);
+                    if (!UsuarioBanco) {
+                      return res.status(404).send('Funcionário não encontrado.');
+                    }
+                  
+                    // Valida a senha
+                    if (!senha || senha.length < 6 || senha.length > 20) {
+                      return res.status(422).send('A senha deve ter entre 6 e 20 caracteres.');
+                    }
+                  
+                    // Atualiza a senha
+                    const respostaBanco = await UsuarioBanco.update({
+                      senha
+                    });
+                  
+                    res.json(respostaBanco);
+                  }
+
+export default {listar, selecionar, inserir, alterar, excluir, definirSenha };

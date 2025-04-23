@@ -106,7 +106,7 @@ async function inserir(req, res)  {
               return res.status(404).send('Funcionário não encontrado.');
             }
           
-            // Valida o comprimento da senha
+            // Valida a senha
             if (!senha || senha.length < 6 || senha.length > 20) {
               return res.status(422).send('A senha deve ter entre 6 e 20 caracteres.');
             }

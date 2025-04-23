@@ -69,32 +69,6 @@ async function inserir(req, res)  {
         res.json(respostaBanco);
     }
 
-    // async function demitir(req, res)  {
-    //         const idfuncionario = req.params.id;
-    //         const demissao = req.body.demissao;
-
-    
-        
-    //         //verifica se o idfuncionario existe
-    //         const fucionarioBanco = await funcionario.findByPk(idfuncionario);
-    //         if (!fucionarioBanco) {
-    //                 res.status(404).send('Funcionario não encontrado.');
-    //         }
-    
-    //         //verifica se o fucionario ja foi demitido
-    //         if (!fucionarioBanco.ativo) {
-    //             res.status(422).send('Este fucionario ja foi demitido.');
-    //         }
-    
-    
-            
-    //         //alterando o campo emprestado do livro para true 
-    //         const ativo = false;
-    //         await funcionario.update(
-    //             {demissao, ativo},
-    //             {where: {id}});
-    //         res.json(respostaBanco);
-    //     }
         async function demitir(req, res) {
             const idfuncionario = req.body.idfuncionario;
             const demissao = req.body.demissao;
@@ -118,7 +92,7 @@ async function inserir(req, res)  {
               },
               { where: { idfuncionario } });
           
-              res.json(funcionarioBanco); // ou return res.json({ message: "Funcionário demitido com sucesso." });
+              res.json(funcionarioBanco); 
             
           }
           

@@ -54,6 +54,7 @@ app.get('/livro/:id', livro.selecionar);
 app.post('/livro', livro.inserir);
 app.put('/livro/:id', livro.alterar);
 app.delete('/livro/:id', livro.excluir);
+app.get('/disponivelemprestimo', livro.disponivelemprestimo);
 
 app.get('/emprestimo', emprestimo.listar);
 app.get('/emprestimo/:id', emprestimo.selecionar);

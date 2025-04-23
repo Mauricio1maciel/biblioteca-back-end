@@ -50,11 +50,7 @@ async function excluir(req, res)  {
         res.json(respostaBanco);
         }
 
-// async function disponivelemprestimo(req, res)  {
-//             const respostaBanco = await Livro.findAll();
-//             res.json(respostaBanco);
-//         }
-        async function disponivelemprestimo(req, res) {
+async function disponivelemprestimo(req, res) {
               const livrosDisponiveis = await Livro.findAll({
                 where: {
                   ativo: true,
@@ -65,6 +61,6 @@ async function excluir(req, res)  {
               res.json(livrosDisponiveis);
             }
               
-            
+
 
 export default {listar, selecionar, inserir, alterar, excluir, disponivelemprestimo };

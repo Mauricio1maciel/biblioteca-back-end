@@ -69,5 +69,58 @@ async function inserir(req, res)  {
         res.json(respostaBanco);
     }
 
+    // async function demitir(req, res)  {
+    //         const idfuncionario = req.params.id;
+    //         const demissao = req.body.demissao;
 
-export default {listar, selecionar, inserir, alterar};
+    
+        
+    //         //verifica se o idfuncionario existe
+    //         const fucionarioBanco = await funcionario.findByPk(idfuncionario);
+    //         if (!fucionarioBanco) {
+    //                 res.status(404).send('Funcionario não encontrado.');
+    //         }
+    
+    //         //verifica se o fucionario ja foi demitido
+    //         if (!fucionarioBanco.ativo) {
+    //             res.status(422).send('Este fucionario ja foi demitido.');
+    //         }
+    
+    
+            
+    //         //alterando o campo emprestado do livro para true 
+    //         const ativo = false;
+    //         await funcionario.update(
+    //             {demissao, ativo},
+    //             {where: {id}});
+    //         res.json(respostaBanco);
+    //     }
+        async function demitir(req, res) {
+            const idfuncionario = req.body.idfuncionario;
+            const demissao = req.body.demissao;
+          
+            
+            //   verifica se o funcionario existe
+              const funcionarioBanco = await Funcionario.findByPk(idfuncionario);
+              if (!funcionarioBanco) {
+                return res.status(404).send('Funcionário não encontrado.');
+              }
+          
+              // verifica se o funcionario já foi demitido
+              if (!funcionarioBanco.ativo) {
+                return res.status(422).send('Este funcionário já foi demitido.');
+              }
+          
+              // atualiza os campos de demissão e ativo
+              await Funcionario.update({
+                demissao,
+                ativo: false
+              },
+              { where: { idfuncionario } });
+          
+              res.json(funcionarioBanco); // ou return res.json({ message: "Funcionário demitido com sucesso." });
+            
+          }
+          
+
+export default {listar, selecionar, inserir, alterar, demitir};

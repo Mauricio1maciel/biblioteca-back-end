@@ -53,8 +53,7 @@ async function excluir(req, res)  {
 async function disponivelemprestimo(req, res) {
               const livrosDisponiveis = await Livro.findAll({
                 where: {
-                  ativo: true,
-                  emprestado: false
+                  ativo: true
                 }
               });
           

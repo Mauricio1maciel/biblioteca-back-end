@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import banco from "./banco.js";
 import editora from "./controller/EditoraController.js";
@@ -13,11 +14,12 @@ import funcionario from "./controller/FuncionarioController.js";
     await banco.authenticate();
     console.log('A conexão com o banco realizada com sucesso.');
   } catch (error) {
-    console.error('Erro ao conectar com o obanco de dados:', error);
+    console.error('Erro ao conectar com o o banco de dados:', error);
   }
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get('/teste',(req, res)=> {
   res.json('Teste ok');
@@ -47,7 +49,7 @@ app.get('/usuario/:id', usuario.selecionar);
 app.post('/usuario', usuario.inserir);
 app.put('/usuario/:id', usuario.alterar);
 app.delete('/usuario/:id', usuario.excluir);
-app.put('/definirSenha/:id', usuario.definirSenha);
+app.put('/senhaUsuario/:id', usuario.definirSenha);
 
 app.get('/livro', livro.listar);
 app.get('/livro/:id', livro.selecionar);
@@ -66,7 +68,7 @@ app.get('/funcionario/:id', funcionario.selecionar);
 app.post('/funcionario', funcionario.inserir);
 app.put('/funcionario/:id', funcionario.alterar);
 app.put('/demitir', funcionario.demitir);
-app.put('/definirSenha/:id', funcionario.definirSenha);
+app.put('/senhaFuncionario/:id', funcionario.definirSenha);
 
 
-app.listen(3000, ()=>{console.log('Servidor rodando na porta 3000')})
+app.listen(4000, ()=>{console.log('Servidor rodando na porta 4000')})

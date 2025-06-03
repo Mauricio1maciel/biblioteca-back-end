@@ -43,7 +43,7 @@ async function excluir(req, res)  {
         res.json(respostaBanco);
         }
 
-async function definirSenha(req, res) {
+async function definirSenhaUsu(req, res) {
                     const idusuario = req.params.id;
                     const senha = req.body.senha;
                   
@@ -66,4 +66,4 @@ async function definirSenha(req, res) {
                     res.json(respostaBanco);
                   }
 
-export default {listar, selecionar, inserir, alterar, excluir, definirSenha };
+export default {listar, selecionar, inserir, alterar, excluir, definirSenhaUsu };

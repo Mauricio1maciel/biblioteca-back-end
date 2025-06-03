@@ -25,12 +25,12 @@ async function inserir(req, res)  {
         const nascimento = req.body.nascimento;
         const biografia = req.body.biografia;
         const nacionalidade = req.body.nacionalidade;
-        
+        const foto = req.body.foto;
     
         const idautor = req.params.id;
     
         const respostaBanco = await Autor.update(
-            {nomeautor, nascimento, biografia, nacionalidade},
+            {nomeautor, nascimento, biografia, nacionalidade, foto},
             {where: {idautor}});
         res.json(respostaBanco);
     }

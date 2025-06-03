@@ -49,7 +49,7 @@ app.get('/usuario/:id', usuario.selecionar);
 app.post('/usuario', usuario.inserir);
 app.put('/usuario/:id', usuario.alterar);
 app.delete('/usuario/:id', usuario.excluir);
-app.put('/senhaUsuario/:id', usuario.definirSenha);
+app.put('/senhaUsuario/:id', usuario.definirSenhaUsu);
 
 app.get('/livro', livro.listar);
 app.get('/livro/:id', livro.selecionar);
@@ -68,7 +68,8 @@ app.get('/funcionario/:id', funcionario.selecionar);
 app.post('/funcionario', funcionario.inserir);
 app.put('/funcionario/:id', funcionario.alterar);
 app.put('/demitir', funcionario.demitir);
-app.put('/senhaFuncionario/:id', funcionario.definirSenha);
+app.delete('/funcionario/:id', funcionario.excluir);
+app.put('/senhaFuncionario/:id', funcionario.definirSenhaFunc);
 
 
 app.listen(4000, ()=>{console.log('Servidor rodando na porta 4000')})

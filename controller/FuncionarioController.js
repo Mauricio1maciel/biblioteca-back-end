@@ -96,7 +96,14 @@ async function inserir(req, res)  {
             
           }
           
-          async function definirSenha(req, res) {
+        async function excluir(req, res)  {
+        const idfuncionario = req.params.id;
+      
+        const respostaBanco = await Funcionario.destroy({where: {idfuncionario}});
+        res.json(respostaBanco);
+        }
+
+          async function definirSenhaFunc(req, res) {
             const idfuncionario = req.params.id;
             const senha = req.body.senha;
           
@@ -121,4 +128,4 @@ async function inserir(req, res)  {
           }
           
 
-export default {listar, selecionar, inserir, alterar, demitir, definirSenha};
+export default {listar, selecionar, inserir, alterar, demitir, definirSenhaFunc, excluir};
